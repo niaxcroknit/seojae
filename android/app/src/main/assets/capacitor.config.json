@@ -1,0 +1,14 @@
+{
+	"appId": "com.nia.seojaehankyeon",
+	"appName": "서재한켠",
+	"webDir": "www",
+	"android": {
+		"allowMixedContent": false
+	},
+	"plugins": {
+		"SystemBars": {
+			"insetsHandling": "css",
+			"initialViewportFitValueHint": "cover"
+		}
+	}
+}

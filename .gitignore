@@ -1,0 +1,21 @@
+# Dependencies: only the Capacitor Android parts that Gradle reads are committed,
+# so the project opens in Android Studio without running npm.
+/node_modules/*
+!/node_modules/@capacitor/
+/node_modules/@capacitor/*
+!/node_modules/@capacitor/android/
+!/node_modules/@capacitor/app/
+!/node_modules/@capacitor/filesystem/
+!/node_modules/@capacitor/share/
+!/node_modules/@capacitor/core/
+
+# Signing keys and passwords: never commit
+*.jks
+*.keystore
+keystore.properties
+
+# Build output
+*.apk
+*.aab
+android/app/release/
+.DS_Store

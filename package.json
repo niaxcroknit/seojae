@@ -1,0 +1,29 @@
+{
+  "name": "seojae",
+  "version": "1.0.0",
+  "description": "서재한켠 - 독서 기록과 형광펜 (Android, Capacitor)",
+  "scripts": {
+    "build:www": "python3 art/build_www.py",
+    "sync": "npm run build:www && npx cap sync android",
+    "icons": "npx @capacitor/assets generate --android --iconBackgroundColor '#2F4A3F' --iconBackgroundColorDark '#2F4A3F' --splashBackgroundColor '#2F4A3F' --splashBackgroundColorDark '#141615'",
+    "test:native": "node art/test_native.js",
+    "store:images": "node art/render.js && node art/shots.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@capacitor/android": "^8.5.3",
+    "@capacitor/app": "^8.1.2",
+    "@capacitor/cli": "^8.5.3",
+    "@capacitor/core": "^8.5.3",
+    "@capacitor/filesystem": "^8.1.5",
+    "@capacitor/share": "^8.0.3",
+    "@fontsource/gowun-batang": "^5.3.0",
+    "@fontsource/ibm-plex-mono": "^5.3.0",
+    "@fontsource/ibm-plex-sans-kr": "^5.3.0"
+  },
+  "devDependencies": {
+    "@capacitor/assets": "^3.0.5"
+  },
+  "private": true
+}
