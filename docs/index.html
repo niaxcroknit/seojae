@@ -3,47 +3,88 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>서재한켠 개인정보처리방침</title>
+<title>서재한켠</title>
+<meta name="description" content="가진 책을 서재처럼 꽂아 두고, 한줄평·감상·페이지 메모·형광펜으로 가볍게 남기는 독서 기록 앱">
+<link rel="icon" href="img/icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@700&family=IBM+Plex+Sans+KR:wght@400;500;600&display=swap">
 <style>
-:root { --bg:#F5F6F4; --fg:#1C1F1E; --muted:#6E7471; --line:#E2E5E2; --accent:#2F4A3F; color-scheme: light; }
-@media (prefers-color-scheme: dark) { :root { --bg:#141615; --fg:#E9ECEA; --muted:#959C98; --line:#2C302E; --accent:#9CC3B1; color-scheme: dark; } }
-body { margin:0; background:var(--bg); color:var(--fg); font:16px/1.75 "Apple SD Gothic Neo","Malgun Gothic","Noto Sans KR",system-ui,sans-serif; }
-main { max-width:680px; margin:0 auto; padding:40px 20px 64px; }
-h1 { font-size:26px; line-height:1.35; margin:0 0 4px; }
-h2 { font-size:18px; margin:32px 0 6px; padding-top:20px; border-top:1px solid var(--line); }
-p, li { margin:6px 0; }
-main > p:nth-of-type(1) { color:var(--muted); font-size:14px; }
-a { color:var(--accent); overflow-wrap:anywhere; }
+/* Layout: one narrow column like the app itself; screenshots scroll sideways in their own strip */
+:root {
+  --bg: #F5F6F4; --surface: #FFFFFF; --ink: #1C1F1E; --muted: #6E7471; --line: #E2E5E2;
+  --accent: #2F4A3F; --accent-soft: #E3EBE7; --hl: #F3E37C; --hl-ink: #1C1F1E;
+  --display: "Gowun Batang", "Noto Serif KR", serif;
+  --body: "IBM Plex Sans KR", "Apple SD Gothic Neo", "Malgun Gothic", system-ui, sans-serif;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root { --bg: #141615; --surface: #1C1F1E; --ink: #E9ECEA; --muted: #959C98; --line: #2C302E;
+    --accent: #9CC3B1; --accent-soft: #24302B; --hl: #6B5E1E; --hl-ink: #F3EFD6; color-scheme: dark; }
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.7 var(--body); }
+main { max-width: 640px; margin: 0 auto; padding: 48px 20px 40px; display: flex; flex-direction: column; gap: 44px; }
+a { color: var(--accent); }
+a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+
+.hero { display: flex; flex-direction: column; gap: 18px; }
+.mark { width: 76px; height: 76px; border-radius: 18px; display: block; }
+h1 { font-family: var(--display); font-size: 44px; line-height: 1.15; margin: 0; letter-spacing: -0.5px; }
+.lead { font-size: 19px; margin: 0; text-wrap: balance; }
+mark { background: var(--hl); color: var(--hl-ink); padding: 0 4px; border-radius: 3px; }
+.status { align-self: flex-start; font-size: 13px; font-weight: 500; color: var(--accent); background: var(--accent-soft); border-radius: 999px; padding: 4px 12px; }
+
+.shots { display: flex; gap: 14px; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 8px; margin: 0 -20px; padding-left: 20px; padding-right: 20px; }
+.shots figure { margin: 0; flex: none; width: 200px; scroll-snap-align: start; display: flex; flex-direction: column; gap: 8px; }
+.shots img { width: 100%; height: auto; aspect-ratio: 9 / 16; border-radius: 14px; border: 1px solid var(--line); display: block; background: var(--surface); }
+.shots figcaption { font-size: 13px; color: var(--muted); }
+
+.features { display: flex; flex-direction: column; gap: 22px; }
+.features h2, .note h2 { font-family: var(--display); font-size: 21px; margin: 0 0 4px; }
+.features p, .note p { margin: 0; color: var(--ink); }
+.feature { display: grid; grid-template-columns: 6px minmax(0, 1fr); gap: 14px; }
+.feature::before { content: ""; border-radius: 3px; background: var(--line); }
+.feature.hl::before { background: var(--hl); }
+
+.note { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 20px; }
+.note p + p { margin-top: 8px; color: var(--muted); font-size: 15px; }
+
+footer { max-width: 640px; margin: 0 auto; padding: 24px 20px 48px; border-top: 1px solid var(--line); font-size: 14px; color: var(--muted); display: flex; gap: 18px; flex-wrap: wrap; }
 </style>
 </head>
 <body>
 <main>
-<h1>서재한켠 개인정보처리방침</h1>
-<p>시행일: 2026년 10월 26일</p>
-<p>서재한켠(이하 "앱")은 이용자의 개인정보를 수집하지 않습니다. 이 방침은 앱이 어떤 정보를 어디에 저장하는지 설명합니다.</p>
-<h2>1. 수집하는 개인정보</h2>
-<p>앱은 이름, 이메일, 전화번호, 위치, 기기 식별자 등 어떤 개인정보도 수집하지 않습니다. 회원가입과 로그인 기능이 없습니다.</p>
-<h2>2. 앱에 저장되는 정보</h2>
-<p>이용자가 직접 입력한 다음 정보는 <strong>이용자의 기기 안에만</strong> 저장되며, 개발자나 다른 서버로 전송되지 않습니다.</p>
-<ul>
-<li>책 정보(제목, 저자, 출판사, 쪽수), 읽은 상태와 날짜</li>
-<li>한줄평, 별점, 감상, 페이지 메모, 형광펜 표시</li>
-<li>표지 사진</li>
-</ul>
-<h2>3. 카메라와 사진</h2>
-<p>표지를 등록할 때 이용자가 직접 카메라로 찍거나 앨범에서 고른 사진 한 장만 사용합니다. 사진은 기기 안에서 표지 크기로 줄여 저장되며, 외부로 전송되지 않습니다. 앱은 앨범 전체에 접근하지 않습니다.</p>
-<h2>4. 기록 내보내기</h2>
-<p>이용자가 '기록 내보내기'를 누르면 기록이 담긴 파일이 만들어지고, 이용자가 고른 앱(예: 드라이브, 메일)으로 전달됩니다. 이 기능은 이용자가 직접 실행할 때만 동작하며, 개발자는 그 파일을 받지 않습니다.</p>
-<h2>5. 제3자 제공 및 광고</h2>
-<p>앱은 광고, 분석 도구, 외부 로그인을 사용하지 않으며, 어떤 정보도 제3자에게 제공하지 않습니다.</p>
-<h2>6. 정보의 삭제</h2>
-<p>책을 서재에서 빼면 그 책의 기록이 삭제됩니다. 앱을 삭제하면 기기에 저장된 모든 기록이 함께 삭제됩니다.</p>
-<h2>7. 아동의 개인정보</h2>
-<p>앱은 아동을 대상으로 하지 않으며, 아동을 포함한 누구의 개인정보도 수집하지 않습니다.</p>
-<h2>8. 방침의 변경</h2>
-<p>이 방침이 바뀌면 이 페이지에 바뀐 내용과 시행일을 알립니다.</p>
-<h2>9. 문의</h2>
-<p>개인정보 관련 문의: <a href="https://github.com/niaxcroknit/seojae/issues">https://github.com/niaxcroknit/seojae/issues</a></p>
+  <section class="hero">
+    <img class="mark" src="img/icon-192.png" alt="서재한켠 아이콘" width="76" height="76">
+    <h1>서재한켠</h1>
+    <p class="lead">가진 책, 읽은 책, <mark>마음에 남은 문장</mark>까지.<br>한 줄씩 가볍게 남기는 독서 기록.</p>
+    <span class="status">Google Play 출시 준비 중</span>
+  </section>
+
+  <div class="shots" aria-label="앱 화면">
+    <figure><img src="img/screen-1.jpg" alt="서재 목록 화면. 읽는 중인 책은 진도 막대와 쪽수가 보인다" loading="lazy" width="540" height="960"><figcaption>서재에서 바로 쪽수 고치기</figcaption></figure>
+    <figure><img src="img/screen-2.jpg" alt="읽는 중인 책의 페이지별 메모 화면" loading="lazy" width="540" height="960"><figcaption>읽다가 남기는 페이지 메모</figcaption></figure>
+    <figure><img src="img/screen-3.jpg" alt="다 읽은 책의 한줄평과 별점, 감상 화면" loading="lazy" width="540" height="960"><figcaption>다 읽고 남기는 한줄평과 감상</figcaption></figure>
+    <figure><img src="img/screen-4.jpg" alt="형광펜으로 칠한 문장 모음 화면" loading="lazy" width="540" height="960"><figcaption>칠한 문장만 모아 보기</figcaption></figure>
+  </div>
+
+  <section class="features" aria-label="기능">
+    <div class="feature"><div><h2>내 서재</h2><p>표지를 찍거나 앨범에서 골라 책을 꽂아요. 비스듬히 찍어도 반듯하게 펴서 표지로 써요.</p></div></div>
+    <div class="feature"><div><h2>읽는 중</h2><p>목록에서 바로 읽은 쪽수를 고치고, 남기고 싶은 쪽에 메모를 붙여요.</p></div></div>
+    <div class="feature"><div><h2>다 읽은 뒤</h2><p>'다 읽음'을 누르면 한줄평부터 남기게 안내해요. 길게 쓰고 싶은 날엔 감상을 통으로 써요.</p></div></div>
+    <div class="feature hl"><div><h2>형광펜</h2><p>감상과 메모에서 문장을 골라 칠하면, 어디서 칠했는지와 함께 한곳에 모여요.</p></div></div>
+  </section>
+
+  <section class="note">
+    <h2>내 기록은 내 폰에</h2>
+    <p>로그인도 서버도 없어요. 모든 기록은 폰 안에만 저장되고, 원할 때 파일로 내보내 보관할 수 있어요.</p>
+    <p>자세한 내용은 <a href="privacy/">개인정보처리방침</a>에 있어요.</p>
+  </section>
 </main>
+<footer>
+  <a href="privacy/">개인정보처리방침</a>
+  <a href="https://github.com/niaxcroknit/seojae/issues">문의하기</a>
+</footer>
 </body>
 </html>

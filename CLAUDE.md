@@ -8,6 +8,7 @@ Reading-log Android app (Capacitor 8 wrapping one HTML page). The user is not a 
 - localStorage key `reading-log-books` and backup file `books.json` (Filesystem DATA): keep for data compatibility.
 - Signing keys are never committed (`*.jks` is ignored). The user keeps `seojae-key.jks`.
 - Bump `versionCode` in `android/app/build.gradle` for every Play upload.
+- GitHub Pages (main, /docs): `docs/index.html` is the app landing page; the privacy policy lives at `docs/privacy/` = https://niaxcroknit.github.io/seojae/privacy/ (this URL goes into Play Console — do not move it, and never put the policy back on the site root).
 
 ## How it fits together
 - `src/seojae.html` is the single source page. It is the same file as the user's Claude web artifact (which uses `window.claude` db/sample/assets for sharing and AI cover reading). In the app (`IS_APP`, Capacitor native) those features are hidden via `.native .social-only` and storage is local + `books.json` backup.

@@ -30,10 +30,10 @@ https://play.google.com/console → **앱 만들기**
 이미 만들어져 있어요. 이 주소를 그대로 쓰면 돼요.
 
 ```
-https://niaxcroknit.github.io/seojae/
+https://niaxcroknit.github.io/seojae/privacy/
 ```
 
-GitHub 저장소의 `docs/index.html`이 이 페이지예요. 문의처는 저장소의 Issues 게시판으로 되어 있어요. 이메일로 바꾸고 싶으면 알려 주세요.
+GitHub 저장소의 `docs/privacy/index.html`이 이 페이지예요. 주소 맨 끝의 `privacy/`까지 꼭 넣어 주세요. (`/seojae/`만 넣으면 앱 소개 페이지가 열려요.) 문의처는 저장소의 Issues 게시판으로 되어 있어요. 이메일로 바꾸고 싶으면 알려 주세요.
 
 ## 3. 앱 설정 (대시보드 → '앱 설정' 할 일 목록)
 

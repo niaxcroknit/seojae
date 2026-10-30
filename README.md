@@ -7,7 +7,8 @@
 |---|---|
 | 앱 ID | `com.nia.seojaehankyeon` (Play에 처음 올린 뒤에는 바꿀 수 없어요) |
 | 버전 | 1.0.0 (versionCode 1) |
-| 개인정보처리방침 | https://niaxcroknit.github.io/seojae/ |
+| 소개 페이지 | https://niaxcroknit.github.io/seojae/ |
+| 개인정보처리방침 | https://niaxcroknit.github.io/seojae/privacy/ |
 
 ---
 
@@ -38,7 +39,7 @@
 | `www/` | 앱 화면 (웹으로 만든 화면, 글꼴 포함) |
 | `src/seojae.html` | 앱 화면의 원본 (Claude 웹 버전과 같은 파일) |
 | `store/` | 스토어 아이콘·그래픽·스크린샷, 등록 문구, 개인정보처리방침, 등록 순서 |
-| `docs/` | 개인정보처리방침 웹페이지 (GitHub Pages) |
+| `docs/` | 소개 페이지(`index.html`)와 개인정보처리방침(`privacy/`) — GitHub Pages |
 | `assets/` | 아이콘·시작 화면 원본 이미지 |
 | `art/` | 화면 빌드, 이미지 생성, 앱 동작 시험 스크립트 |
 | `.github/workflows/` | 자동 빌드 설정 |
