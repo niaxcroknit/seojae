@@ -28,3 +28,15 @@ html = ('<!doctype html>\n<html lang="ko">\n<head>\n<meta charset="utf-8">\n'
         '</head>\n<body>\n' + body + '\n</body>\n</html>\n')
 open(f'{root}/www/index.html', 'w', encoding='utf-8').write(html)
 print('www/index.html rebuilt')
+
+# ---- Web version for GitHub Pages: docs/index.html is the app itself (privacy policy stays at docs/privacy/) ----
+docs = f'{root}/docs'
+shutil.rmtree(f'{docs}/fonts', ignore_errors=True)
+shutil.copytree(f'{root}/www/fonts', f'{docs}/fonts')
+web = html.replace('<script src="capacitor.js"></script>\n',
+    '<link rel="manifest" href="manifest.webmanifest">\n<link rel="icon" href="img/icon-192.png">\n'
+    '<link rel="apple-touch-icon" href="img/icon-192.png">\n<meta name="theme-color" content="#2F4A3F">\n'
+    '<meta name="description" content="가진 책, 읽은 책, 마음에 남은 문장까지. 한줄평과 형광펜으로 가볍게 남기는 독서 기록">\n')
+assert 'manifest.webmanifest' in web
+open(f'{docs}/index.html', 'w', encoding='utf-8').write(web)
+print('docs/index.html rebuilt (web version of the app)')

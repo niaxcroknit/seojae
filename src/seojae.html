@@ -371,6 +371,8 @@ input[type=number] { -moz-appearance: textfield; appearance: textfield; }
 (function () {
   "use strict";
   var IS_APP = !!(window.Capacitor && window.Capacitor.isNativePlatform && window.Capacitor.isNativePlatform());
+  // Opened as a plain web page (GitHub Pages), not inside Claude or the Android app: no sharing, browser storage, file download.
+  var IS_WEB = !IS_APP && !(window.claude && window.claude.use);
   var SPINES = ["#2F4A3F", "#3B4F7A", "#7A3B3B", "#8A6D2E", "#5B4B6E", "#4F6B70"];
   var ST = { unread: "안 읽음", reading: "읽는 중", done: "다 읽음" };
   var YEAR = new Date().getFullYear();
@@ -598,7 +600,7 @@ input[type=number] { -moz-appearance: textfield; appearance: textfield; }
       '<span class="label">' + YEAR + ' 기록' + (isSampleMode() ? " · 예시" : "") + '</span>' +
       '<div class="stat-nums"><div><b>' + yearDone + '</b><span>올해 완독</span></div><div><b>' + pagesRead.toLocaleString("ko-KR") + '</b><span>읽은 쪽수</span></div><div><b>' + hls + '</b><span>형광펜</span></div></div>' +
       '<div class="months" role="img" aria-label="월별 완독 권수">' + months.map(function (n, i) { return '<div title="' + (i + 1) + '월 ' + n + '권"><em>' + (n || "") + '</em><i class="' + (n ? "" : "z") + '" style="height:' + Math.round(n / max * 32) + 'px"></i><span style="' + (i === nowM ? "color:var(--ink);font-weight:600" : "") + '">' + (i + 1) + '</span></div>'; }).join("") + '</div>' +
-      '<div class="export-row"><span class="export-msg" id="exportMsg">' + (IS_APP ? "기록을 파일로 보내 보관할 수 있어요. 폰을 바꿀 때 필요해요." : "기록을 파일로 받아 둘 수 있어요. 표지 사진은 빠져요.") + '</span><button type="button" class="btn sm" id="exportBtn"' + (isSampleMode() ? " disabled" : "") + '>기록 내보내기</button></div>';
+      '<div class="export-row"><span class="export-msg" id="exportMsg">' + (IS_WEB ? "기록은 이 브라우저에만 있어요. 가끔 파일로 받아 두세요." : IS_APP ? "기록을 파일로 보내 보관할 수 있어요. 폰을 바꿀 때 필요해요." : "기록을 파일로 받아 둘 수 있어요. 표지 사진은 빠져요.") + '</span><button type="button" class="btn sm" id="exportBtn"' + (isSampleMode() ? " disabled" : "") + '>기록 내보내기</button></div>';
   }
 
   function renderList() {
@@ -638,7 +640,7 @@ input[type=number] { -moz-appearance: textfield; appearance: textfield; }
   }
   $("stats").addEventListener("click", async function (e) {
     if (!e.target.closest("#exportBtn")) return;
-    var msg = $("exportMsg"), data = exportData(), name = "서재한켠-" + today() + ".json";
+    var msg = $("exportMsg"), data = exportData(), name = "seojaehankyeon-" + today() + ".json";
     if (IS_APP) {
       try {
         if (!nativeFs || !nativeShare) throw new Error("no plugins");
@@ -654,6 +656,15 @@ input[type=number] { -moz-appearance: textfield; appearance: textfield; }
     if (downloads) {
       try { await downloads.save({ filename: name, data: data }); msg.textContent = "내보냈어요. " + books.length + "권이 들어 있어요."; }
       catch (err) { msg.textContent = err && /cancel|declin|denied/i.test(err.code || "") ? "내보내기를 취소했어요." : "내보내지 못했어요. 잠시 후 다시 해 보세요."; }
+      return;
+    }
+    if (IS_WEB) {
+      try {
+        var url = URL.createObjectURL(new Blob([data], { type: "application/json" }));
+        var a = document.createElement("a"); a.href = url; a.download = name; document.body.appendChild(a); a.click(); a.remove();
+        setTimeout(function () { URL.revokeObjectURL(url); }, 2000);
+        msg.textContent = "파일로 받았어요. " + books.length + "권이 들어 있어요.";
+      } catch (err) { msg.textContent = "파일로 받지 못했어요. 다른 브라우저에서 다시 해 보세요."; }
       return;
     }
     try { await navigator.clipboard.writeText(data); msg.textContent = "파일로 받을 수 없는 화면이라 기록을 클립보드에 복사했어요. 메모 앱에 붙여 넣어 보관하세요."; }
@@ -1456,6 +1467,7 @@ input[type=number] { -moz-appearance: textfield; appearance: textfield; }
   // ---------- boot ----------
   renderAll();
   if (IS_APP) bootApp().catch(function () { useLocal(""); });
+  else if (IS_WEB) { document.documentElement.classList.add("native", "web"); useLocal("기록은 이 브라우저에만 저장돼요. 브라우저 기록을 지우면 함께 사라져요."); }
   else if (window.claude && window.claude.use) connect();
   else setTimeout(function () { if (window.claude && window.claude.use) connect(); else useLocal("이 브라우저에만 저장되고 있어요."); }, 600);
 })();
